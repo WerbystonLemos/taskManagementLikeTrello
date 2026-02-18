@@ -1,0 +1,28 @@
+services:
+
+  app:
+    build: 
+      context: .
+      dockerfile: docker/php/Dockerfile
+    container_name: laravel_app
+    volumes:
+      - ./laravel:/var/www
+    working_dir: /var/www
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    command: php artisan serve --host=0.0.0.0 --port=8000
+      
+
+  db:
+    image: postgres:15
+    container_name: laravel_db
+    restart: always
+    environment:
+      POSTGRES_DB: trello_clone
+      POSTGRES_USER: laravel
+      POSTGRES_PASSWORD: roottoor
+    ports:
+      - "5432:5432"
+      
