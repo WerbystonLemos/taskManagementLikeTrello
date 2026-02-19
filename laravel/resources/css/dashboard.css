@@ -1,0 +1,30 @@
+.mainContainer
+{
+    
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.containerColuna
+{
+    border-radius: 8px;
+    background: red;
+    width: 20em;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.headerColuna, .footerColuna
+{
+    padding: 10px;
+}
+
+.task
+{
+    padding: 10px;
+    background: grey;
+}

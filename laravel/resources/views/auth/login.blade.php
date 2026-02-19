@@ -27,8 +27,8 @@
         <!-- Remember Me -->
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 dark:border-gray-700 text-indigo-600 shadow-sm focus:ring-indigo-500 dark:focus:ring-indigo-600 dark:focus:ring-offset-gray-800" name="remember">
-                <span class="ms-2 text-sm text-gray-600 dark:text-gray-400">{{ __('Continuar conenctado') }}</span>
+                <input id="remember_me" type="checkbox" class="rounded border-gray-300 dark:border-gray-700 shadow-sm" name="remember">
+                <span class="ms-2">{{ __('Continuar conenctado') }}</span>
             </label>
         </div>
 
@@ -38,7 +38,7 @@
                 Continuar
             </button>
 
-            <a class="text-sm text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800 no-underline" href="{{ route('register') }}">
+            <a class="text-sm rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 dark:focus:ring-offset-gray-800 no-underline" href="{{ route('register') }}">
                 {{ __('Criar uma conta') }}
             </a>
 
