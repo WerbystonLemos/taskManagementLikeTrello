@@ -12,7 +12,13 @@ services:
       - "8000:8000"
     depends_on:
       - db
-    command: php artisan serve --host=0.0.0.0 --port=8000
+    command: sh -c "
+        until [ -f artisan ]; do
+          echo 'Aguardando artisan...';
+          sleep 2;
+        done;
+        php artisan serve --host=0.0.0.0 --port=8000
+      "
       
 
   db:
