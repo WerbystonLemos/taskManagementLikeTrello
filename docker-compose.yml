@@ -10,6 +10,7 @@ services:
     working_dir: /var/www
     ports:
       - "8000:8000"
+      - "5173:5173"
     depends_on:
       - db
     command: sh -c "
