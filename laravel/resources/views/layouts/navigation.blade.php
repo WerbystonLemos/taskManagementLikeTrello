@@ -1,12 +1,12 @@
-<nav x-data="{ open: false }" class="bg-[#1a1a1c] border-b border-gray-100">
+<nav x-data="{ open: false }" class="headerDivAppBlade">
     <!-- Primary Navigation Menu -->
     <div class="max-w-7xl mx-auto px-4 py-2 sm:px-6 lg:px-8">
-        <div class="flex justify-between h-16">
+        <div class="headerContainer">
             <div class="flex p-3">
                 <!-- Logo -->
                 <div class="shrink-0 flex items-center">
                     <a href="{{ route('dashboard') }}">
-                        <x-application-logo class="block h-9 fill-current" />
+                        <x-application-logo color="#fff" width='54' height='28' class="block h-9 fill-current" />
                     </a>
                 </div>
 
@@ -97,3 +97,4 @@
         </div>
     </div>
 </nav>
+@vite(['resources/css/navigation.css'])

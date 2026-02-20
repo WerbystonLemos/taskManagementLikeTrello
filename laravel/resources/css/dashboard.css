@@ -1,24 +1,29 @@
 .mainContainer
 {
-    
     padding: 10px;
     display: flex;
     flex-direction: row;
     gap: 10px;
 }
-
 .containerColuna
 {
     border-radius: 8px;
-    background: red;
+    background: var(--color-text-primary);
+    color: var(--color-text-secondary);
+    font-weight: 600;
     width: 20em;
     height: 100%;
     display: flex;
     flex-direction: column;
     gap: 5px;
 }
-
-.headerColuna, .footerColuna
+.headerColuna
+{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+}
+.footerColuna
 {
     padding: 10px;
 }
@@ -26,5 +31,64 @@
 .task
 {
     padding: 10px;
-    background: grey;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    background: var(--color-text-neutro);
+    transition: all 0.6s;
+    display: flex;
+    justify-content: space-between;
+}
+.task:hover
+{
+    border-radius: 10px;
+    background: var(--color-text-terciary);
+    transition: all 0.6s;
+}
+.inputTask
+{
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.6s;
+    margin-left: -1em;
+}
+.buttonHeadeColuna
+{
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.6s;
+}
+.task:hover .buttonHeadeColuna
+{
+    margin-left: 0em;
+    opacity: 1;
+    visibility: visible;
+    display: inline-block;
+    transition: all 0.6s;
+}
+.task:hover .inputTask
+{
+    margin-left: 0em;
+    opacity: 1;
+    visibility: visible;
+    display: inline-block;
+    transition: all 0.6s;
+}
+.containerBtnAddColuna
+{
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.3);
+    color: var(--color-text-neutro);
+    width: 20em;
+    height: 100%;
+    display: flex;
+    font-weight: 500;
+    flex-direction: column;
+    gap: 5px;
+    transition: all 0.3s;
+}
+.containerBtnAddColuna:hover
+{
+    color: var(--color-text-secondary);
+    background: rgba(255, 255, 255, 1);
+    transition: all 0.3s;
 }

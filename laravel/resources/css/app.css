@@ -1,7 +1,18 @@
+@import 'bootstrap-icons/font/bootstrap-icons.css';
 @import "bootstrap/dist/css/bootstrap.min.css";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.mainDivAppBlade
+{
+    background-color: #0079be;
+}
+
+.headerDivAppBlade
+{
+    background-color: rgba(0,0,0, 0.3);
+}
 
 .buttonLink
 {
@@ -13,4 +24,26 @@
 .text-cinza
 {
     color: #abacb0;
+}
+
+/* ----------------- */
+/* ELEMENTOS PADROES */
+/* ----------------- */
+input
+{
+    border-radius: 100%;
+}
+input[type='checkbox']:checked, input[type='checkbox']:focus
+{
+    outline: #7ea94a !important;
+    box-shadow: none;
+    color: #7ea94a;
+}
+
+:root
+{
+    --color-text-neutro: #fff;
+    --color-text-primary: #e3e4e6;
+    --color-text-secondary: #6e6e6e;
+    --color-text-terciary: #ccc;
 }
