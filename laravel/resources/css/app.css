@@ -29,7 +29,11 @@
 /* ----------------- */
 /* ELEMENTOS PADROES */
 /* ----------------- */
-input
+input:focus, textarea:focus
+{
+    outline: none;
+}
+input[type='checkbox']
 {
     border-radius: 100%;
 }
@@ -46,4 +50,6 @@ input[type='checkbox']:checked, input[type='checkbox']:focus
     --color-text-primary: #e3e4e6;
     --color-text-secondary: #6e6e6e;
     --color-text-terciary: #ccc;
+    --color-text-quaternary: #005385;
+    --color-text-fithy: #0079be;
 }

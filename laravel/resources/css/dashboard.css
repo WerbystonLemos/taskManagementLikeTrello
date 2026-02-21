@@ -92,3 +92,100 @@
     background: rgba(255, 255, 255, 1);
     transition: all 0.3s;
 }
+#modalAddColumn, #modalAddTask
+{
+    background-color: #000;
+    opacity: 0.8;
+}
+#inputAddNameColumn
+{
+    width: 100%;
+    border: 0.5px solid var(--color-text-primary);
+    border-radius: 6px;
+    outline: none;
+}
+#inputAddNameColumn:focus, #inputAddNameColumn:active
+{
+    outline: none;
+    border: 1px solid var(--color-text-neutro);
+}
+.containerContentModalAddTask
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+#containerDescriptionTask
+{
+    /* border: 1px solid red; */
+    width: 100%;
+    display: flex;
+    align-items: start;
+    justify-content: center;
+    gap: 10px;
+    flex-direction: column;
+}
+#containerDescriptionTask > textarea
+{
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid var(--color-text-primary);
+}
+#containerDescriptionTask > textarea:focus, #containerDescriptionTask > textarea:active
+{
+    outline: none !important;
+    border: 0.5px solid var(--color-text-primary);
+    box-shadow: none;
+}
+#containerCommentTask
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+#titleInfo
+{
+    display: flex;
+    gap: 10px;
+}
+#titleInfo > *
+{
+    font-weight: 600;
+}
+.profile
+{
+    background: var(--color-text-quaternary);
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 100%;
+    color: var(--color-text-terciary);
+    padding: 5px;
+    font-size: 14pt;
+    font-weight: bold;
+}
+#containerUserInfos
+{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+#containerUserInfos > p
+{
+    font-size: 12pt;
+}
+.containerUserInfosUser
+{
+    font-weight: 700;
+}
+.containerUserInfosDate
+{
+    text-decoration: underline;
+    font-size: 10pt;
+    font-weight: 600;
+    color: var(--color-text-quaternary);
+}

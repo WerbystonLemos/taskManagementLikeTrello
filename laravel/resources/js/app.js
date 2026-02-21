@@ -1,4 +1,3 @@
-
 import Alpine from 'alpinejs';
 import './bootstrap';
 import 'bootstrap';
