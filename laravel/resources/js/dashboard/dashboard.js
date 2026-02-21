@@ -1,18 +1,14 @@
 import $ from 'jquery';
-showModalAddTask()
 
-// exibe modal coluna
-$("#btnShowModalAddColumn").on('click', showModalAddColumn)
-$("#btnShowModalAddTask").on('click', showModalAddTask)
-// omite modal add coluna
+$("#btnShowModalAddColumn").on('click', showModalAddColumn) // exibe modal coluna
+$("#btnShowModalAddTask").on('click', showModalAddTask) // omite modal add coluna
 $(".modalAddColumn").on('click', closeModalAddColumn)
 $("#modalAddColumn").on('click', function (e) {
     if ($(e.target).closest('.modal-dialog').length === 0) {
         closeModalAddColumn();
     }
 });
-// omite modal add task
-$(".btnCloseModalAddTask").on('click', closeModalAddTask)
+$(".btnCloseModalAddTask").on('click', closeModalAddTask) // omite modal add task
 $("#modalAddTask").on('click', function (e) {
     if ($(e.target).closest('.modal-dialog').length === 0) {
         closeModalAddTask();
