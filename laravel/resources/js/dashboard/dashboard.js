@@ -1,6 +1,7 @@
 import $ from 'jquery';
 
 loadAllColumnsAndTasks($("#idProject").val())
+
 $(document).on('click', '.btnDeleteColumn', deleteColumn)
 $("#btnSalvarModalAddColumn").on('click', saveColumn)
 $(document).on('click', '#buttonHeadeColunaEdit', showModalEditTask)
@@ -28,6 +29,7 @@ $(document).on('click', '#modalAddTask', function (e) {
 $(document).on('click', '#buttonHeadeColunaDelete', deleteTask)
 $(document).on('change', '.inputTask', changeStatusTask)
 $(document).on('click', '#btnAddTask', saveTask)
+$(document).on('click', '#btnEditTask', editTask)
 
 function showModalAddColumn()
 {
@@ -41,13 +43,15 @@ function closeModalAddColumn()
 
 function showModalEditTask()
 {
-    let idTask          = $(this).data('idtask')
+    let idTask      = $(this).data('idtask')
+    let columns_id  = $(this).data('colunaid')
+    let created_by  = $(this).data('creator') 
+    let project_id  = $(this).data('projectid') 
 
     $.ajax({
         url: `/api/task/${idTask}`,
         method: 'get',
         success: (resp) => {
-            console.log(resp[0])
             $("#titleNameTask").html(resp[0].name)
             $("#nameTask").val(resp[0].name)
             $("#statusTask").prop('checked', resp[0].status)
@@ -55,6 +59,10 @@ function showModalEditTask()
             $("#profileoWner").html(resp[0].users.name)
             $("#dateUpdateTask").html(new Date(resp[0].updated_at).toLocaleString())
             $("#descriptionTask").html(resp[0].description)
+            $("#modalEditTaskColumnsId").val(columns_id)
+            $("#modalEditTaskCreatedBy").val(created_by)
+            $("#modalEditTaskTaskId").val(idTask)
+            $("#modalEditTaskProjectId").val(project_id)
         },
         error: err => console.log(err)
     })
@@ -140,7 +148,7 @@ function makeHtmlREnder(dataList)
             </button>
         </div>
     `
-
+    $(".mainContainer").html('')
     dataList.forEach( col => {
         tagHtmlTask = ''
         col.tasks.forEach( (task) => {
@@ -157,7 +165,7 @@ function makeHtmlREnder(dataList)
                             <button id='buttonHeadeColunaDelete' class="buttonHeadeColuna" data-idtask='${task.id}' title='Deletar Task'>
                                 <i class="bi bi-trash3"></i>
                             </button>
-                            <button id='buttonHeadeColunaEdit' class="buttonHeadeColuna" data-idtask='${task.id}' title='Editar Task'>
+                            <button id='buttonHeadeColunaEdit' class="buttonHeadeColuna" data-idtask='${task.id}' data-colunaid='${task.columns_id}' data-projectid='${task.created_by}' data-creator='${task.created_by}' title='Editar Task'>
                                 <i class='bi bi-pencil-square'></i>
                             </button>
                         </div>
@@ -264,5 +272,32 @@ function saveTask()
         },
         error: (err) => console.log(err),
         complete: closeModalAddTask()
+    })
+}
+
+function editTask()
+{
+    let name        = $('#nameTask').val()
+    let description = $('#descriptionTask').val()
+    let status      = $('#statusTask').is(':checked')
+    let columns_id  = $('#modalEditTaskColumnsId').val()
+    let created_by  = $('#modalEditTaskCreatedBy').val()
+    let idTask      = $('#modalEditTaskTaskId').val()
+    let idProject   = $('#modalEditTaskProjectId').val()
+
+    $.ajax({
+        url: `/api/task/edit/${idTask}`,
+        method: 'patch',
+        data: {
+            "name": name,
+            "description": description,
+            "status": status,
+            "columns_id": columns_id,
+            "created_by": created_by
+        },
+        success: resp => {
+            loadAllColumnsAndTasks(idProject)
+            closeModalEditTask()
+        }
     })
 }

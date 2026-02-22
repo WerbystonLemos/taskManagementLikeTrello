@@ -1,11 +1,7 @@
 <x-app-layout >
     <input type="hidden" id="idProject" name="idProject" value="{{ $id }}">
 
-    <div class="mainContainer">       
-
-        
-    
-    </div>
+    <div class="mainContainer"></div>
 
     <!-- modal add column -->
     <div id="modalAddColumn" class="modal" tabindex="-1">
@@ -44,6 +40,10 @@
                         
                         <div id="containerDescriptionTask">
                             <div class="content-group d-flex align-items-center justify-content-center gap-2">
+                                <input type="hidden" id="modalEditTaskColumnsId" name="modalEditTaskColumnsId"/>
+                                <input type="hidden" id="modalEditTaskCreatedBy" name="modalEditTaskCreatedBy"/>
+                                <input type="hidden" id="modalEditTaskTaskId" name="modalEditTaskTaskId"/>
+                                <input type="hidden" id="modalEditTaskProjectId" name="modalEditTaskProjectId"/>
                                 <input type="checkbox" id="statusTask" name="statusTask" />
                                 <input type="text" id="nameTask" name="nameTask" value="Digite o título  da task" />
                             </div>
@@ -68,7 +68,7 @@
                 </div>
                 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Salvar</button>
+                    <button id="btnEditTask" type="button" class="btn btn-primary">Salvar</button>
                 </div>
             </div>
         </div>

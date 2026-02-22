@@ -77,6 +77,25 @@ class TaskController extends Controller
             ->get();
     }
 
+    public function editTask($id, Request $request)
+    {
+        $task           = Task::find($id);
+
+        if(!$task)
+        {
+            return response()->json(['error' => 'Erro ao editar task'], 401);
+        }
+        
+        $task->name         = $request->name;
+        $task->description  = $request->description;
+        $task->status       = $request->status;
+        $task->columns_id   = $request->columns_id;
+        $task->created_by   = $request->created_by;
+        
+        $task->save();
+        return response()->json(['success' => 'Task atualizada com sucesso'], 200);
+    }
+
     public function setStatusTask($id, Request $request)
     {
         $newStatus      = $request->status;
