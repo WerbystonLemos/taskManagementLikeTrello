@@ -7,57 +7,6 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(Task $task)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Task $task)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Task $task)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy(Task $task)
     {
         //
@@ -65,11 +14,30 @@ class TaskController extends Controller
 
     public function getAllTasks()
     {
-        return Task::All();
+        return Task::with([
+                'users' => function($qry) {
+                    $qry->select('id', 'name as nameUser', 'email as emailUser');
+                },
+                'comments',
+                'columns' => function($qry) {
+                    $qry->select('id', 'name as nameColumn', 'position as positionColumn', 'project_id');
+                }
+            ])
+            ->orderBy('columns_id')
+            ->orderBy('position')
+            ->get();
+    }
+
+    public static function getTasksByIdColumn($id)
+    {
+        return Task::where('columns_id', $id)->get();
     }
 
     public static function getTasksById($id)
     {
-        return Task::where('columns_id', $id)->get();
+        return Task::where('id', $id)
+            ->with('users')
+            ->with('comments')
+            ->get();
     }
 }

@@ -96,7 +96,7 @@
     background: rgba(255, 255, 255, 1);
     transition: all 0.3s;
 }
-#modalAddColumn, #modalAddTask
+#modalAddColumn, #modalEditTask
 {
     background-color: rgba(0,0,0, .8);
 }
@@ -140,6 +140,16 @@
     outline: none !important;
     border: 0.5px solid var(--color-text-primary);
     box-shadow: none;
+}
+#containerDescriptionTask > .content-group
+{
+    width: 100%;
+}
+#nameTask
+{
+    width: 100%;
+    border-radius: 8px;
+    border: 0.8px solid var(--color-text-primary)
 }
 #containerCommentTask
 {
@@ -191,4 +201,13 @@
     font-size: 10pt;
     font-weight: 600;
     color: var(--color-text-quaternary);
+}
+#modalAddTask
+{
+    background: hsla(0, 0%, 0%, 0.8);
+}
+#inputTitleTask
+{
+    width: 100%;
+    border: 1px solid var(--color-text-primary);
 }

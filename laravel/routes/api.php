@@ -13,8 +13,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::post('/login', [AuthController::class, 'login']);
-Route::post('/logout', [AuthController::class, 'logout'])
-    ->middleware('auth:sanctum');
+Route::post('/logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
 
 Route::get('/projects', [ProjectController::class, 'getAllProjects']);
 Route::post('/saveProject', [ProjectController::class, 'saveProject']);
@@ -23,9 +22,12 @@ Route::delete('/destroy/{id}', [ProjectController::class, 'destroy']);
 Route::get('/columns', [ColumnController::class, 'getAllColumns']);
 Route::get('/columns/{id}', [ColumnController::class, 'getColumnById']);
 Route::get('/columnswithProjectId/{id}', [ColumnController::class, 'getColumnsWithTasksByProjectId']);
+Route::get('/columnsWithTasksByIdProject/{id}', [ColumnController::class, 'getColumnsWithTasksByIdProject']);
 Route::post('/saveColumn', [ColumnController::class, 'saveColumn']);
 Route::delete('/deleteColumn/{id}', [ColumnController::class, 'destroyColumn']);
 
 Route::get('/tasks', [TaskController::class, 'getAllTasks']);
-Route::get('/tasks/{id}', [TaskController::class, 'getTasksById']);
+Route::get('/tasks/{id}', [TaskController::class, 'getTasksByIdColumn']);
+Route::get('/task/{id}', [TaskController::class, 'getTasksById']);
+
 Route::get('/comments', [Comment::class, 'getAllComments']);

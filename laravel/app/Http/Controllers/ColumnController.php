@@ -26,6 +26,16 @@ class ColumnController extends Controller
             ->get();
     }
 
+    public static function getColumnsWithTasksByIdProject($projectId)
+    {
+        return Column::where('project_id', $projectId)
+            ->with(['tasks' => function($qry) {
+                $qry->select()->orderBy('position');
+            }])
+            ->orderBy('position')
+            ->get();
+    }
+
     public static function saveColumn(Request $request)
     {
         $lastPosition = count(self::getColumnsWithTasksByProjectId($request->project_id));

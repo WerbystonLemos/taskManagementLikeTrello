@@ -14,11 +14,16 @@ class Task extends Model
         'created_by'
     ];
 
-    public function column()
+    public function columns()
     {
-        return $this->belongsTo(Column::class);
+        return $this->belongsTo(Column::class, 'columns_id');
     }
 
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'created_by');
+    }
+        
     public function creator()
     {
         return $this->belongsTo(User::class, 'created_by');
@@ -26,6 +31,6 @@ class Task extends Model
 
     public function comments()
     {
-        return $this->hasMany(Comment::class);
+        return $this->hasMany(Comment::class, 'tasks_id');
     }
 }
