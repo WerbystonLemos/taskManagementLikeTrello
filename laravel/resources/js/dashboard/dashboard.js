@@ -313,21 +313,35 @@ function activateDragAndDrop()
         new Sortable(this, {
             group: 'shared',
             animation: 150,
-            
+
             onEnd: function (evt) {
+                let columnId = $(evt.to).data('column')
+                let orderedIds = []
 
-                    let columnId = $(evt.to).data('column')
-                    let orderedIds = []
+                $(evt.to).children('.containerTasks').each(function () {
+                    orderedIds.push($(this).data('id'))
+                })
 
-                    $(evt.to).children('.containerTasks').each(function () {
-                        orderedIds.push($(this).data('id'))
-                    })
-
-                    updateTasksOrder(columnId, orderedIds)
-                }
-            });
+                updateTasksOrder(columnId, orderedIds)
+            }
+        });
 
     });
+
+    new Sortable(document.querySelector(".mainContainer"), {
+        animation: 150,
+        draggable: ".containerColuna",
+
+        onEnd: function (evt) {
+            let orderedColumns = []
+
+            $(".mainContainer").children(".containerColuna").each(function () {
+                orderedColumns.push($(this).data("id"))
+            })
+
+            updateColumnsOrder(orderedColumns)
+        }
+    })
 }
 
 function updateTasksOrder(columnId, orderedIds)
@@ -339,6 +353,17 @@ function updateTasksOrder(columnId, orderedIds)
             column_id: columnId,
             ordered_ids: orderedIds
         },
+        success: resp => console.log(resp),
+        error: err => console.log(err)
+    })
+}
+
+function updateColumnsOrder(orderedColumns)
+{
+    $.ajax({
+        url: `/api/column/reorder`,
+        method: 'patch',
+        data: { ordered_ids: orderedColumns },
         success: resp => console.log(resp),
         error: err => console.log(err)
     })

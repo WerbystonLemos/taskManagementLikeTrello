@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
-use Illuminate\Container\Attributes\Auth as AttributesAuth;
-// use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 

@@ -57,4 +57,15 @@ class ColumnController extends Controller
         Column::destroy($id);
         redirect("dashboard/".$idProject);
     }
+
+    public function reorder(Request $request)
+    {
+        foreach ($request->ordered_ids as $index => $columnId) {
+
+            Column::where('id', $columnId)
+                ->update(['position' => $index]);
+        }
+
+        return response()->json(['success' => true]);
+    }
 }

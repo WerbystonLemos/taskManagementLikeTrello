@@ -24,6 +24,7 @@ Route::get('/columns/{id}', [ColumnController::class, 'getColumnById']);
 Route::get('/columnswithProjectId/{id}', [ColumnController::class, 'getColumnsWithTasksByProjectId']);
 Route::get('/columnsWithTasksByIdProject/{id}', [ColumnController::class, 'getColumnsWithTasksByIdProject']);
 Route::post('/saveColumn', [ColumnController::class, 'saveColumn']);
+Route::patch('/column/reorder', [ColumnController::class, 'reorder']);
 Route::delete('/deleteColumn/{id}', [ColumnController::class, 'destroyColumn']);
 
 Route::get('/tasks', [TaskController::class, 'getAllTasks']);
