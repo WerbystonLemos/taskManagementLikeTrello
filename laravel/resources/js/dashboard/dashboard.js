@@ -25,6 +25,8 @@ $(document).on('click', '#modalAddTask', function (e) {
         closeModalAddTask()
     }
 })
+$(document).on('click', '#buttonHeadeColunaDelete', deleteTask)
+$(document).on('change', '.inputTask', changeStatusTask)
 
 function showModalAddColumn()
 {
@@ -136,17 +138,17 @@ function makeHtmlREnder(dataList)
         col.tasks.forEach( (task) => {
             tagHtmlTask += `
                 <div class='containerTasks'>
-                    <div class='task'>
+                    <div id="task_${task.id}" class='task'>
                         <div class='titleTaskAndInput'>
-                            <input class='inputTask' type='checkbox' name='' id=''>
+                            <input class='inputTask' type='checkbox' data-idtask='${task.id}' />
                             <span>${task.name}</span>
                         </div>
 
                         <div>
-                            <button id='buttonHeadeColunaDelete' class="buttonHeadeColuna" data-idtask='${task.id}'>
+                            <button id='buttonHeadeColunaDelete' class="buttonHeadeColuna" data-idtask='${task.id}' title='Deletar Task'>
                                 <i class="bi bi-trash3"></i>
                             </button>
-                            <button id='buttonHeadeColunaEdit' class="buttonHeadeColuna" data-idtask='${task.id}'>
+                            <button id='buttonHeadeColunaEdit' class="buttonHeadeColuna" data-idtask='${task.id}' title='Editar Task'>
                                 <i class='bi bi-pencil-square'></i>
                             </button>
                         </div>
@@ -198,4 +200,35 @@ function gera_slug(nome)
         partes[0].slice(0, 1) +
         partes[partes.length - 1].slice(0, 1)
     ).toUpperCase();
+}
+
+function deleteTask()
+{
+    let idTask = $(this).data('idtask')
+    
+    $.ajax({
+        url: `/api/task/${idTask}`,
+        method: 'delete',
+        success: (resp) => {
+            console.log(resp)
+            $(`#task_${idTask}`).remove()
+        },
+        error: err => console.log(err)
+    })
+}
+
+function changeStatusTask()
+{
+    let idTask = $(this).data('idtask')
+    let status = $(this).is(':checked')
+
+    console.log(status)
+    
+    $.ajax({
+        url: `/api/task/${idTask}`,
+        method: 'patch',
+        data: { 'status': status },
+        success: (resp) => console.log(resp),
+        error: (err) => console.log(err)
+    })
 }

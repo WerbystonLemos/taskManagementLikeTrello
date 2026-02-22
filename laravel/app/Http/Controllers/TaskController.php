@@ -7,9 +7,15 @@ use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {
-    public function destroy(Task $task)
+    public function destroy($id)
     {
-        //
+        if (!Task::find($id))
+        {
+            return response()->json(['error' => 'Erro ao deletar Task!'], 501);
+        }
+        
+        Task::destroy($id);
+        return response()->json(['success' => 'Task deletada com sucesos!'], 200);
     }
 
     public function getAllTasks()
