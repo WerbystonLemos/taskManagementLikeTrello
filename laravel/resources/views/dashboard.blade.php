@@ -1,47 +1,38 @@
 <x-app-layout >
 
-    <div class="mainContainer col-12">
-    
-        <div class="containerColuna">
+    <div class="mainContainer">
+        
+        @foreach( \App\Http\Controllers\ColumnController::getColumnsWithTasksByProjectId($id) as $column)
+        <div class="containerColuna" data-id="{{ $column->id }}">
             
             <!-- // header; -->
             <div class="headerColuna">
-                <p class="titleColuna">cabecalho do quadro</p>
+                <p class="titleColuna">{{$column->name}}</p>
+                <button class="btnDeleteColumn" data-idcolumn="{{ $column->id }}" >
+                    <i class="bi bi-trash3"></i>
+                </button>
             </div>
 
+            @foreach($column->tasks as $task)
             <div class="task">
                 <div class="titleTaskAndInput">
                     <input class="inputTask" type="checkbox" name="" id="">
-                    MIinha Task A
+                    {{$task->name}}
                 </div>
-                <button class="buttonHeadeColuna"><i class="bi bi-pencil-square"></i></button>
+                <button class="buttonHeadeColuna" data-idTask="{{$task->id}}"><i class="bi bi-pencil-square"></i></button>
             </div>
-            
-            <div class="task">
-                <div class="titleTaskAndInput">
-                    <input class="inputTask" type="checkbox" name="" id="">
-                    MIinha Task B
-                </div>
-                <button class="buttonHeadeColuna"><i class="bi bi-pencil-square"></i></button>
-            </div>
-            
-            <div class="task">
-                <div class="titleTaskAndInput">
-                    <input class="inputTask" type="checkbox" name="" id="">
-                    MIinha Task C
-                </div>
-                <button class="buttonHeadeColuna"><i class="bi bi-pencil-square"></i></button>
-            </div>
+            @endforeach
 
             <!-- footer -->
             <div class="footerColuna">
-                <button id="btnShowModalAddTask">
+                <button id="btnShowModalAddTask" class="btnShowModalAddTaskColumn">
                     <i class="bi bi-plus-lg"></i>
                     Adicionar um cartão
                 </button>
             </div>
 
         </div>
+        @endforeach
 
         <div class="containerBtnAddColuna">
             <button id="btnShowModalAddColumn" class="footerColuna">
@@ -67,7 +58,7 @@
                 </div>
                 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-sm btn-primary">Salvar</button>
+                    <button id="btnSalvarModalAddColumn" type="button" class="btn btn-sm btn-primary" data-idProject="{{$id}}">Salvar</button>
                 </div>
             </div>
         </div>

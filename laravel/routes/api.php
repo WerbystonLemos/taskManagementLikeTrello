@@ -1,0 +1,31 @@
+<?php
+
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\ProjectController;
+use App\Http\Controllers\ColumnController;
+use App\Http\Controllers\TaskController;
+use App\Models\Comment;
+
+Route::get('/user', function (Request $request) {
+    return $request->user();
+})->middleware('auth:sanctum');
+
+Route::post('/login', [AuthController::class, 'login']);
+Route::post('/logout', [AuthController::class, 'logout'])
+    ->middleware('auth:sanctum');
+
+Route::get('/projects', [ProjectController::class, 'getAllProjects']);
+Route::post('/saveProject', [ProjectController::class, 'saveProject']);
+Route::delete('/destroy/{id}', [ProjectController::class, 'destroy']);
+
+Route::get('/columns', [ColumnController::class, 'getAllColumns']);
+Route::get('/columns/{id}', [ColumnController::class, 'getColumnById']);
+Route::get('/columnswithProjectId/{id}', [ColumnController::class, 'getColumnsWithTasksByProjectId']);
+Route::post('/saveColumn', [ColumnController::class, 'saveColumn']);
+Route::delete('/deleteColumn/{id}', [ColumnController::class, 'destroyColumn']);
+
+Route::get('/tasks', [TaskController::class, 'getAllTasks']);
+Route::get('/tasks/{id}', [TaskController::class, 'getTasksById']);
+Route::get('/comments', [Comment::class, 'getAllComments']);

@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('name');
             $table->text('description');
             $table->integer('position')->default(0);
+            $table->boolean('status')->default(false);
             $table->foreignId('columns_id')->constrained('columns')->cascadeOnDelete();
             $table->foreignId('created_by')->constrained('users')->cascadeOnDelete();
             $table->timestamps();

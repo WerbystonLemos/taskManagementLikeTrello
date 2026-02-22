@@ -28,7 +28,7 @@
         <div class="block mt-4">
             <label for="remember_me" class="inline-flex items-center">
                 <input id="remember_me" type="checkbox" class="rounded border-gray-300 dark:border-gray-700 shadow-sm" name="remember">
-                <span class="ms-2">{{ __('Continuar conenctado') }}</span>
+                <span class="ms-2">{{ __('Continuar conectado') }}</span>
             </label>
         </div>
 

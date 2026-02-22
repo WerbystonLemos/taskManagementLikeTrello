@@ -1,9 +1,13 @@
 .mainContainer
 {
+    box-sizing: border-box;
     padding: 10px;
     display: flex;
+    flex-wrap: nowrap;
     flex-direction: row;
     gap: 10px;
+    overflow-x: scroll;
+    height: 93.6vh;
 }
 .containerColuna
 {
@@ -11,8 +15,9 @@
     background: var(--color-text-primary);
     color: var(--color-text-secondary);
     font-weight: 600;
-    width: 20em;
-    height: 100%;
+    min-width: 19.2em;
+    height: min-content;
+    max-height: 90vh;
     display: flex;
     flex-direction: column;
     gap: 5px;
@@ -27,7 +32,6 @@
 {
     padding: 10px;
 }
-
 .task
 {
     padding: 10px;
@@ -78,8 +82,8 @@
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.3);
     color: var(--color-text-neutro);
-    width: 20em;
-    height: 100%;
+    min-width: 19.2em;
+    max-height: 3em;
     display: flex;
     font-weight: 500;
     flex-direction: column;
@@ -94,8 +98,7 @@
 }
 #modalAddColumn, #modalAddTask
 {
-    background-color: #000;
-    opacity: 0.8;
+    background-color: rgba(0,0,0, .8);
 }
 #inputAddNameColumn
 {

@@ -1,0 +1,132 @@
+.mainContainer
+{
+    padding: 30px;
+}
+#profile
+{
+    background-color: var(--color-text-quaternary);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    box-shadow: -2px -2px 2px ;
+    color: var(--color-text-primary);
+    font-weight: 600;
+}
+#contaierAreaUser h3
+{
+    color: var(--color-text-primary);
+    font-size: 10pt;
+    font-weight: 700;
+}
+#asideAreaUser
+{
+    display: flex;
+    align-items: center;
+    justify-content: start;
+    gap: 5px;
+    margin-top: 20px;
+}
+#asideAreaUser > span
+{
+    color: var(--color-text-primary)
+}
+#aside
+{
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+#aside > button
+{
+    background-color: var(--color-text-quaternary);
+    color: var(--color-text-primary);
+    border-radius: 8px;
+    padding: 5px 10px;
+    width: 100%;
+    display: flex;
+}
+#projectContainer
+{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: top;
+    gap: 10px;
+}
+#btnQuadroAdd
+{
+    display: flex;
+    min-width: 250px;
+    max-width: 250px;
+    height: 120px;
+    background-color: var(--color-text-secondary);
+    justify-content: center;
+    align-items: center;
+    color: var(--color-text-terciary);
+    font-weight: 600;
+    border-radius: 10px;
+    transition: all 0.4s;
+}
+#btnQuadroAdd:hover
+{
+    background-color: var(--color-text-primary);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    transition: all 0.4s;
+}
+.containerProject
+{
+    display: flex;
+}
+.project
+{
+    width: 250px;
+    height: 120px;
+    background-color: var(--color-text-quaternary);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-radius: 10px;
+}
+.headerProject
+{
+    display: flex;
+    justify-content: end;
+    margin: 5px;
+    color: var(--color-text-primary);
+}
+.projectName
+{
+    background-color: var(--color-text-primary);
+    color: var(--color-text-secondary);
+    padding: 5px 10px;
+    border-radius: 0 0 10px 10px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+.projectName:hover
+{
+    background-color: var(--color-text-secondary);
+    color: var(--color-text-primary);
+    transition: all 0.3s;
+}
+#modalAddProject
+{
+    background-color: rgba(0,0,0, .8);
+}
+#inputNameProject, #inputdescriptionProject
+{
+    width: 100%;
+    border-radius: 8px;
+    border: 0.5px solid var(--color-text-primary)
+}
+#containerMainModal
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
