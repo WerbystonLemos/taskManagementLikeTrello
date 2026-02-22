@@ -29,5 +29,6 @@ Route::delete('/deleteColumn/{id}', [ColumnController::class, 'destroyColumn']);
 Route::get('/tasks', [TaskController::class, 'getAllTasks']);
 Route::get('/tasks/{id}', [TaskController::class, 'getTasksByIdColumn']);
 Route::get('/task/{id}', [TaskController::class, 'getTasksById']);
+Route::patch('/task/{id}', [TaskController::class, 'setStatusTask']);
 
 Route::get('/comments', [Comment::class, 'getAllComments']);

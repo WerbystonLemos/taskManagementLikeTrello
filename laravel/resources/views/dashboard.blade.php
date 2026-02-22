@@ -1,4 +1,5 @@
 <x-app-layout >
+    <input type="hidden" id="idProject" name="idProject" value="{{ $id }}">
 
     <div class="mainContainer">       
 

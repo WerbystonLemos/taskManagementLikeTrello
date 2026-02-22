@@ -40,4 +40,19 @@ class TaskController extends Controller
             ->with('comments')
             ->get();
     }
+
+    public function setStatusTask($id, Request $request)
+    {
+        $newStatus      = $request->status;
+        $task           = Task::find($id);
+
+        if(!$task)
+        {
+            return response()->json(['error' => 'Erro ao editar status da task'], 401);
+        }
+        
+        $task->status   = $newStatus;
+        $task->save();
+        return response()->json(['success' => 'Task atualizada com sucesso'], 200);
+    }
 }

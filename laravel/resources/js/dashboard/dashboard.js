@@ -1,5 +1,6 @@
 import $ from 'jquery';
 
+loadAllColumnsAndTasks($("#idProject").val())
 $(document).on('click', '.btnDeleteColumn', deleteColumn)
 $("#btnSalvarModalAddColumn").on('click', saveColumn)
 $(document).on('click', '#buttonHeadeColunaEdit', showModalEditTask)
@@ -107,7 +108,6 @@ function closeModalAddTask()
     $("#modalAddTask").hide()
 }
 
-loadAllColumnsAndTasks(1)
 function loadAllColumnsAndTasks(id)
 {
     $.ajax({
