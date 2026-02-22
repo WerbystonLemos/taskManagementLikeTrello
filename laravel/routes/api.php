@@ -30,6 +30,7 @@ Route::get('/tasks', [TaskController::class, 'getAllTasks']);
 Route::get('/tasks/{id}', [TaskController::class, 'getTasksByIdColumn']);
 Route::post('/task', [TaskController::class, 'store']);
 Route::get('/task/{id}', [TaskController::class, 'getTasksById']);
+Route::patch('/task/reorder', [TaskController::class, 'reorder']);
 Route::patch('/task/{id}', [TaskController::class, 'setStatusTask']);
 Route::patch('/task/edit/{id}', [TaskController::class, 'editTask']);
 Route::delete('/task/{id}', [TaskController::class, 'destroy']);

@@ -115,4 +115,15 @@ class TaskController extends Controller
     {
         return (Task::where('columns_id', $idColumn)->max('position'));
     }
+
+    public function reorder(Request $request)
+    {
+        foreach ($request->ordered_ids as $index => $taskId) {
+
+            Task::where('id', $taskId)
+                ->update(['position' => $index]);
+        }
+
+        return response()->json(['success' => true]);
+    }
 }

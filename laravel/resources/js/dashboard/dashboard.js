@@ -1,4 +1,5 @@
 import $ from 'jquery';
+import Sortable from 'sortablejs';
 
 loadAllColumnsAndTasks($("#idProject").val())
 
@@ -154,8 +155,8 @@ function makeHtmlREnder(dataList)
         col.tasks.forEach( (task) => {
             
             tagHtmlTask += `
-                <div class='containerTasks'>
-                    <div id="task_${task.id}" class='task'>
+                <div class='containerTasks' data-id="${task.id}">
+                    <div id="task_${task.id}" class='task' data-column="${col.id}">
                         <div class='titleTaskAndInput'>
                             <input class='inputTask' type='checkbox' data-idtask='${task.id}' ${task.status ? 'checked' : ''}/>
                             <span>${task.name}</span>
@@ -186,11 +187,13 @@ function makeHtmlREnder(dataList)
                     </button>
                 </div>
 
-                ${tagHtmlTask}
+                <div class="tasksList" data-column="${col.id}">
+                    ${tagHtmlTask}
+                </div>
 
                 <!-- footer -->
                 <div class="footerColuna">
-                    <button class="btnShowModalAddTaskColumn" data-idproject="${col.project_id}" data-idcolumn="${col.project_id}">
+                    <button class="btnShowModalAddTaskColumn" data-idproject="${col.project_id}" data-idcolumn="${col.id}"> <!--project_id-->
                         <i class="bi bi-plus-lg"></i>
                         Adicionar um cartão
                     </button>
@@ -201,6 +204,7 @@ function makeHtmlREnder(dataList)
     });
 
     $(".mainContainer").prepend(tagHtmlCol+tagAddColumn)
+    activateDragAndDrop()
 }
 
 function gera_slug(nome)
@@ -299,5 +303,43 @@ function editTask()
             loadAllColumnsAndTasks(idProject)
             closeModalEditTask()
         }
+    })
+}
+
+function activateDragAndDrop()
+{
+    $(".tasksList").each(function () {
+
+        new Sortable(this, {
+            group: 'shared',
+            animation: 150,
+            
+            onEnd: function (evt) {
+
+                    let columnId = $(evt.to).data('column')
+                    let orderedIds = []
+
+                    $(evt.to).children('.containerTasks').each(function () {
+                        orderedIds.push($(this).data('id'))
+                    })
+
+                    updateTasksOrder(columnId, orderedIds)
+                }
+            });
+
+    });
+}
+
+function updateTasksOrder(columnId, orderedIds)
+{
+    $.ajax({
+        url: `/api/task/reorder`,
+        method: 'PATCH',
+        data: {
+            column_id: columnId,
+            ordered_ids: orderedIds
+        },
+        success: resp => console.log(resp),
+        error: err => console.log(err)
     })
 }
