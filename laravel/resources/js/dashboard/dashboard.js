@@ -5,7 +5,7 @@ $(document).on('click', '.btnDeleteColumn', deleteColumn)
 $("#btnSalvarModalAddColumn").on('click', saveColumn)
 $(document).on('click', '#buttonHeadeColunaEdit', showModalEditTask)
 $("#btnShowModalAddColumn").on('click', showModalAddColumn)
-$(".btnShowModalAddTaskColumn").on('click', showModalSaveTask)
+$(document).on('click', ".btnShowModalAddTaskColumn", showModalSaveTask)
 $(".modalAddColumn").on('click', closeModalAddColumn)
 $("#modalAddColumn").on('click', function (e) {
     if ($(e.target).closest('.modal-dialog').length === 0) {
@@ -27,6 +27,7 @@ $(document).on('click', '#modalAddTask', function (e) {
 })
 $(document).on('click', '#buttonHeadeColunaDelete', deleteTask)
 $(document).on('change', '.inputTask', changeStatusTask)
+$(document).on('click', '#btnAddTask', saveTask)
 
 function showModalAddColumn()
 {
@@ -132,15 +133,23 @@ function makeHtmlREnder(dataList)
 {
     let tagHtmlCol  = ''
     let tagHtmlTask = ''
+    let tagAddColumn = `
+        <div class="containerBtnAddColuna">
+            <button id="btnShowModalAddColumn" class="footerColuna">
+                <i class="bi bi-plus"></i> Adicionar outra lista
+            </button>
+        </div>
+    `
 
     dataList.forEach( col => {
         tagHtmlTask = ''
         col.tasks.forEach( (task) => {
+            
             tagHtmlTask += `
                 <div class='containerTasks'>
                     <div id="task_${task.id}" class='task'>
                         <div class='titleTaskAndInput'>
-                            <input class='inputTask' type='checkbox' data-idtask='${task.id}' />
+                            <input class='inputTask' type='checkbox' data-idtask='${task.id}' ${task.status ? 'checked' : ''}/>
                             <span>${task.name}</span>
                         </div>
 
@@ -173,18 +182,17 @@ function makeHtmlREnder(dataList)
 
                 <!-- footer -->
                 <div class="footerColuna">
-                    <button id="btnShowModalAddTask" class="btnShowModalAddTaskColumn" data-idproject="${col.project_id}" data-idcolumn="${col.project_id}">
+                    <button class="btnShowModalAddTaskColumn" data-idproject="${col.project_id}" data-idcolumn="${col.project_id}">
                         <i class="bi bi-plus-lg"></i>
                         Adicionar um cartão
                     </button>
                 </div>
-
             </div>
         `
         
     });
 
-    $(".mainContainer").prepend(tagHtmlCol)
+    $(".mainContainer").prepend(tagHtmlCol+tagAddColumn)
 }
 
 function gera_slug(nome)
@@ -230,5 +238,31 @@ function changeStatusTask()
         data: { 'status': status },
         success: (resp) => console.log(resp),
         error: (err) => console.log(err)
+    })
+}
+
+function saveTask()
+{
+    let inputColumnId           = $("#inputColumnId").val()
+    let inputProjectId          = $("#inputProjectId").val()
+    let inputChkbxStatusTask    = $("#inputChkbxStatusTask").is(':checked')
+    let inputTitleTask          = $("#inputTitleTask").val()
+    let userId                  = $(this).data('iduser')
+
+    $.ajax({
+        url: `/api/task`,
+        method: 'post',
+        data: {
+            columns_id: inputColumnId,
+            status: inputChkbxStatusTask,
+            name: inputTitleTask,
+            user_id: userId,
+        },
+        success: (res) => {
+            console.log(res)
+            loadAllColumnsAndTasks(inputProjectId)
+        },
+        error: (err) => console.log(err),
+        complete: closeModalAddTask()
     })
 }

@@ -3,11 +3,7 @@
 
     <div class="mainContainer">       
 
-        <div class="containerBtnAddColuna">
-            <button id="btnShowModalAddColumn" class="footerColuna">
-                <i class="bi bi-plus"></i> Adicionar outra lista
-            </button>
-        </div>
+        
     
     </div>
 
@@ -79,7 +75,7 @@
     </div>    
 
     <!-- modal add task -->
-    <div id="modalAddTask" class="modal modal-lg"  tabindex="-1">
+    <div id="modalAddTask" class="modal modal-md"  tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 
@@ -91,12 +87,12 @@
                 <div id="containerBodyModalAddTask" class="modal-body d-flex align-items-center justify-content-center gap-1.5">
                     <input name="inputColumnId" id="inputColumnId" type="hidden" />
                     <input name="inputProjectId" id="inputProjectId" type="hidden" />
-                    <input type="checkbox" />
+                    <input id="inputChkbxStatusTask" type="checkbox" />
                     <input id="inputTitleTask" name="inputTitleTask" class="bordered rounded-2" type="text" placeholder="Digite o título da task..." />
                 </div>
                 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-primary">Salvar</button>
+                    <button id="btnAddTask" type="button" class="btn btn-primary" data-iduser="{{Auth::user()->id}}">Salvar</button>
                 </div>
 
             </div>

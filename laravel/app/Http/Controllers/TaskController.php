@@ -3,10 +3,40 @@
 namespace App\Http\Controllers;
 
 use App\Models\Task;
+use Illuminate\Container\Attributes\Auth as AttributesAuth;
+// use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {
+    public function store(Request $request)
+    {
+        try
+        {
+            $name       = $request->name;
+            $columns_id = $request->columns_id;
+            $status     = $request->status;
+            $position   = (int)$this->getLastPosition($columns_id) + 1;
+            // echo $position;exit;
+
+            Task::create([
+                'name'          => $name,
+                'description'   => $request->description ?? '',
+                'position'      => $position,
+                'status'        => $status,
+                'columns_id'    => $columns_id,
+                'created_by'    => $request->user_id,
+            ]);
+
+            return response()->json(['success' => 'Task salvo com sucesso!'], 201);
+        }
+        catch (\Throwable $th)
+        {
+            return response()->json(['success' => $th->getMessage()], 401);
+        }
+    }
+        
     public function destroy($id)
     {
         if (!Task::find($id))
@@ -60,5 +90,10 @@ class TaskController extends Controller
         $task->status   = $newStatus;
         $task->save();
         return response()->json(['success' => 'Task atualizada com sucesso'], 200);
+    }
+
+    private function getLastPosition($idColumn)
+    {
+        return (Task::where('columns_id', $idColumn)->max('position'));
     }
 }
