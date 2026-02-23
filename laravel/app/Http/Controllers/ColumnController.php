@@ -38,12 +38,24 @@ class ColumnController extends Controller
 
     public static function saveColumn(Request $request)
     {
-        $lastPosition = count(self::getColumnsWithTasksByProjectId($request->project_id));
-        Column::create([
-            'name'          => $request->name,
-            'project_id'    => $request->project_id,
-            'position'      => $lastPosition,
-        ]);
+        try
+        {
+            $lastPosition = count(self::getColumnsWithTasksByProjectId($request->project_id));
+
+            // print_r($lastPosition);exit;
+
+            Column::create([
+                'name'          => $request->name,
+                'project_id'    => $request->project_id,
+                'position'      => (int) $lastPosition ?? '',
+            ]);
+            
+            return response()->json(['success' => 'Coluna salva com sucesso!'], 201);
+        }
+        catch (\Throwable $th)
+        {
+            return response()->json(['error' => $th->getMessage()], 501);
+        }
     }
 
     public static function destroyColumn($id)

@@ -81,7 +81,7 @@ function saveProject()
             description: textareaDescription,
             user_id: user_id,
         },
-        success: () => loadingProjects(),
+        success: (res) => console.log(res),
         error: err => console.log(err.responseJSON?.message),
         complete: closeModalAddProject()
     })

@@ -4,9 +4,9 @@ import Sortable from 'sortablejs';
 loadAllColumnsAndTasks($("#idProject").val())
 
 $(document).on('click', '.btnDeleteColumn', deleteColumn)
-$("#btnSalvarModalAddColumn").on('click', saveColumn)
+$(document).on('click', "#btnSalvarModalAddColumn", saveColumn)
 $(document).on('click', '#buttonHeadeColunaEdit', showModalEditTask)
-$("#btnShowModalAddColumn").on('click', showModalAddColumn)
+$(document).on('click', "#btnShowModalAddColumn", showModalAddColumn)
 $(document).on('click', ".btnShowModalAddTaskColumn", showModalSaveTask)
 $(".modalAddColumn").on('click', closeModalAddColumn)
 $("#modalAddColumn").on('click', function (e) {
@@ -76,20 +76,24 @@ function closeModalEditTask()
     $("#modalEditTask").hide()
 }
 
-function saveColumn()
+async function saveColumn()
 {
     let idproject = $(this).data('idproject')
-    let titleColumn = $("inputAddNameColumn").val()
+    let titleColumn = $("#inputAddNameColumn").val()
 
-    $.ajax({
+    await $.ajax({
         url: '/api/saveColumn',
-        methos: 'post',
+        method: 'post',
         data: {
             'name': titleColumn,
             'project_id': idproject,
         },
-        success: () => {},
-        error: (err) => console.log(err)
+        success: (res) => { 
+            closeModalAddColumn()
+            loadAllColumnsAndTasks(idproject)
+         },
+        error: (err) => console.log(err),
+        complete: () => closeModalAddColumn()
     })
 }
 
@@ -107,6 +111,8 @@ async function deleteColumn()
 
 function showModalSaveTask()
 {
+    $("#inputTitleTask").val('')
+
     $("#modalAddTask").show()
     let idProject   = $(this).data('idproject')
     let idColumn    = $(this).data('idcolumn')
@@ -182,7 +188,7 @@ function makeHtmlREnder(dataList)
                 <!-- // header; -->
                 <div class="headerColuna">
                     <p class="titleColuna">${col.name}</p>
-                    <button class="btnDeleteColumn" data-idcolumn="${col.name}" >
+                    <button class="btnDeleteColumn" data-idcolumn="${col.id}" >
                         <i class="bi bi-trash3"></i>
                     </button>
                 </div>
