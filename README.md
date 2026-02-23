@@ -15,7 +15,9 @@ Desafio técnico para VOX
  popular as tabelas;
 
  - Perceba que não removi o .env e isso foi proposital para facilitar
- mas reconheço que é má prática
+ mas reconheço que é má prática;
+
+ - Pus na na raíz do projeto a Collection (Trello - VOX.postman_collection.json) em JSON exportada do Postman para que ajude.
 
 ## 🚀 Tecnologias utilizadas
 
